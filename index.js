@@ -3,7 +3,7 @@
  */
 
 import {AppRegistry} from 'react-native';
-import WeatherList from './src/screens/WeatherList';
+import LocationList from './src/screens/LocationList';
 import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => WeatherList);
+AppRegistry.registerComponent(appName, () => LocationList);
