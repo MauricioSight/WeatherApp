@@ -3,7 +3,7 @@
  */
 
 import {AppRegistry} from 'react-native';
-import SearchLocation from './src/screens/SearchLocation';
+import WeatherView from './src/screens/WeatherView';
 import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => SearchLocation);
+AppRegistry.registerComponent(appName, () => WeatherView);

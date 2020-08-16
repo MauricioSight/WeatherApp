@@ -6,6 +6,7 @@ import commonStyles from '../commonStyles'
 import Location from '../components/Location'
 
 export default () => {
+    
     return (
         <View style={style.conteiner}>
             <View style={style.header}>
@@ -15,9 +16,9 @@ export default () => {
                 </TouchableOpacity>
             </View>
             <View style={style.content}>
-                <Location location='Recife' saveAt= {new Date()}/>
-                <Location location='Olinda' saveAt= {new Date()}/>
-                <Location location='Rio de Janeiro' saveAt= {new Date()}/>
+                <Location name='Recife' saveAt= {new Date()}/>
+                <Location name='Olinda' saveAt= {new Date()}/>
+                <Location name='Rio de Janeiro' saveAt= {new Date()}/>
             </View>
         </View>
     )
