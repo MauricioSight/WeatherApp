@@ -15,17 +15,16 @@ export default props => {
     const [locationList, setLocationList] = useState([])
 
     useEffect(() => {
-        if (props.route.params && props.route.params.save) {   
-            favoriteLocation(props.route.params.favorateLocation)
-            props.route.params.save = false
+        if (props.route.params && props.route.params.saveLocation) {   
+            saveLocation(props.route.params.saveLocation)
+            props.route.params.saveLocation = null
         }
     })
 
-    function favoriteLocation(location) {
+    function saveLocation(location) {
         const locations = [ ...locationList ]
         locations.push(location)
         setLocationList(locations)
-        console.log(locations)
     }
 
     return (

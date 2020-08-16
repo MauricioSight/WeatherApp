@@ -5,21 +5,23 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import commonStyles from '../commonStyles'
 import weatherRequest from '../weatherRequest'
 
-export default props => {
-    const [city, setCity] = useState('');
+const initialState = ''
 
-    searchCity = async () => {
-        const waether = await weatherRequest(city)
-        if (waether.err) {
+export default props => {
+    const [city, setCity] = useState(initialState);
+
+    async function searchCity () {
+        const weather = await weatherRequest(city)
+        if (weather.err) {
             Alert.alert(
                 "Ops! Something wrong.",
-                waether.err,
+                weather.err,
                 [{ text: "OK" }],
                 { cancelable: false }
             )
             setCity('')
         } else {
-          props.navigation.navigate('Weather', { waether })
+          props.navigation.navigate('Weather', { weather })
         }
     }
 
@@ -30,8 +32,9 @@ export default props => {
                     <Icon name='chevron-left' color='#FFF' size={20} 
                         style={{ marginLeft: 20, marginRight: 20}}/>
                 </TouchableOpacity>
-                <TextInput placeholder="Search by City..." style='inputText'
+                <TextInput placeholder="Search by City..." style={style.input}
                     onChangeText={desc => setCity( desc )}
+                    placeholderTextColor={'rgba(255, 255, 255, 0.5)'}
                     value={city} />
             </View>
             <View style={style.searchList}>
@@ -49,17 +52,6 @@ export default props => {
     )
 }
 
-const theme = {
-    colors: {
-            placeholder: 'white', 
-            text: 'white', 
-            primary: 'white',
-            underlineColor: 
-            'transparent', 
-            background: '#003489'
-       }
- }
-
 const style = StyleSheet.create({
     conteiner: {
         flex: 1,
@@ -73,6 +65,11 @@ const style = StyleSheet.create({
         marginTop: 5,
         marginBottom: 10
     },
+    input: {
+        fontFamily: commonStyles.fontFamily,
+        color: commonStyles.colors.mainText,
+        fontSize: 17
+    },
     searchList: {
         justifyContent: 'center',
         backgroundColor: commonStyles.colors.backgroundColorGray,
@@ -81,7 +78,7 @@ const style = StyleSheet.create({
         paddingRight: 20
     },
     hairLine: {
-        borderBottomColor: 'rgba(255,255,255,0.8)',
+        borderBottomColor: 'rgba(255,255,255,0.2)',
         borderBottomWidth: StyleSheet.hairlineWidth
     },
     listText: {

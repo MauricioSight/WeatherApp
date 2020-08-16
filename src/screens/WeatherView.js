@@ -1,33 +1,37 @@
 import React, { useState, useEffect  } from 'react'
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import moment from 'moment'
 
 import commonStyles from '../commonStyles'
+import SaveLocation from './SaveLocation'
+
+const initialState = {
+    city: '',
+    description: '',
+    fellsLike: '',
+    temp: '',
+    tempMax: '',
+    tempMin: ''
+}
 
 export default props => {
 
-    const [weatherLocation, setweatherLocation] = useState({
-        city: '',
-        description: '',
-        fellsLike: '',
-        temp: '',
-        tempMax: '',
-        tempMin: ''
-    });
+    const [saveScreen, setSaveScreen] = useState(false)
+    const [weatherLocation, setweatherLocation] = useState(initialState)
 
     useEffect(() => {
-        setweatherLocation(props.route.params.waether)
+        setweatherLocation(props.route.params.weather)
     })
 
-    const onFavorate = () => {
+    function onSaveLocation (name) {
         
-        const favorateLocation = {
-            name: weatherLocation.city,
+        const saveLocation = {
+            name: name,
             city: weatherLocation.city,
             savedAt: new Date().getTime()
         }
-        props.navigation.navigate('List', { favorateLocation, save: true })
+        setSaveScreen(false, props.navigation.navigate('List', { saveLocation }))
     }
 
     return (
@@ -54,13 +58,16 @@ export default props => {
                 <Text style={style.textWeatherValues}>{weatherLocation.description}</Text>
             </View>
             <View style={style.content}>
-                <TouchableOpacity onPress={onFavorate}>
+                <TouchableOpacity onPress={() => setSaveScreen(true)}>
                     <View style={style.favorateButton}>
                         <Icon name='star' color='#FFF' size={20}/>
                         <Text style={style.favorateText}>Favorate</Text>
                     </View>
                 </TouchableOpacity>
             </View>
+            <SaveLocation isVisible={saveScreen}
+                    onSave={onSaveLocation}
+                    onCancel={() => setSaveScreen(false)} />
         </View>
     )
 }
