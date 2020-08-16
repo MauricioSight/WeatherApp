@@ -3,7 +3,7 @@
  */
 
 import {AppRegistry} from 'react-native';
-import LocationList from './src/screens/LocationList';
+import SearchLocation from './src/screens/SearchLocation';
 import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => LocationList);
+AppRegistry.registerComponent(appName, () => SearchLocation);

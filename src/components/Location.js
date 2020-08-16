@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, ImageBackgroundComponent } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import moment from 'moment'
 import 'moment/locale/pt-br'
 
@@ -20,7 +20,7 @@ const style = StyleSheet.create({
     conteiner: {
         width: '100%',
         height: 60,
-        backgroundColor: '#424242',
+        backgroundColor: commonStyles.colors.backgroundColorGray,
         borderRadius: 20,
         justifyContent: 'center',
         marginBottom: 10
