@@ -3,7 +3,7 @@
  */
 
 import {AppRegistry} from 'react-native';
-import WeatherView from './src/screens/LocationList';
+import StackNavegation from './src/navegator/Stack';
 import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => WeatherView);
+AppRegistry.registerComponent(appName, () => StackNavegation);

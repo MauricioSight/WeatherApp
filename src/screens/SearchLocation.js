@@ -5,24 +5,27 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import commonStyles from '../commonStyles'
 
 export default props => {
-    const [searchText, setSearchText] = useState('');
+    const [city, setCity] = useState('');
 
     return (
         <View style={style.conteiner}>
             <View style={style.searchArea}>
-                <Icon name='chevron-left' color='#FFF' size={20} style={{ marginLeft: 20, marginRight: 20}}/>
+                <TouchableOpacity onPress={() => props.navigation.goBack()}>
+                    <Icon name='chevron-left' color='#FFF' size={20} style={{ marginLeft: 20, marginRight: 20}}/>
+                </TouchableOpacity>
                 <TextInput placeholder="Search by City..." style='inputText'
-                    onChangeText={desc => setSearchText( desc )}
-                    value={searchText} 
+                    onChangeText={desc => setCity( desc )}
+                    value={city} 
                     theme={{ colors: { text: theme } }}/>
             </View>
             <View style={style.searchList}>
-                {searchText !== '' ? 
-                    <TouchableOpacity style={style.hairLine}>
-                        <Text style={style.listText}>{searchText}</Text>
+                {city !== '' ? 
+                    <TouchableOpacity style={style.hairLine} 
+                        onPress={() => props.navigation.navigate('Weather', {city})}>
+                        <Text style={style.listText}>{city}</Text>
                     </TouchableOpacity> : null
                 }                
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => props.navigation.navigate('Weather')}>
                     <Text style={style.listText}>My Location</Text>
                 </TouchableOpacity>
             </View>

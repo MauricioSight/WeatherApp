@@ -5,12 +5,17 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import commonStyles from '../commonStyles'
 
 export default props => {
+
     return (
         <View style={style.conteiner}>
             <View style={style.weatherView}>
                 <View style={style.options}>
-                    <Icon name='chevron-left' color='#FFF' size={20}/>
-                    <Icon name='ellipsis-v' color='#FFF' size={20}/>
+                    <TouchableOpacity onPress={() => props.navigation.goBack()}>
+                        <Icon name='chevron-left' color='#FFF' size={20}/>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Icon name='ellipsis-v' color='#FFF' size={20}/>
+                    </TouchableOpacity>
                 </View>
                 <Text style={style.textWeatherValues}>Recife</Text>
                 <Text style={style.textDate}>Sab 8 de Jan 2020</Text>

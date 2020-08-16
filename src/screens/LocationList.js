@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import commonStyles from '../commonStyles'
 import Location from '../components/Location'
 
-export default () => {
+export default props => {
     const [locations, setLocations] = useState([{
         id: 8,
         name: 'Home',
@@ -19,7 +19,7 @@ export default () => {
         desciption: null
     },{
         id: 9,
-        name: 'Mother',
+        name: 'Father',
         city: 'Olinda',
         saved: false,
         savedAt: new Date(),
@@ -30,13 +30,13 @@ export default () => {
         desciption: null
     }])
 
-
     const render = [...locations]
     return (
         <View style={style.conteiner}>
             <View style={style.header}>
                 <Text style={style.headerText}>Weather App</Text>  
-                <TouchableOpacity style={style.buttonSearch}>
+                <TouchableOpacity style={style.buttonSearch}
+                    onPress={() => props.navigation.navigate('Search')} >
                     <Icon name='plus' color='#FFF' size={20}/>
                 </TouchableOpacity>
             </View>
@@ -45,8 +45,7 @@ export default () => {
                         keyExtractor={item => `${item.id}`}
                         renderItem={({ item }) => {
                            return <Location name={item.name} savedAt={item.savedAt}/>
-                        }} />
-                    
+                        }} />  
             </View>
         </View>
     )
