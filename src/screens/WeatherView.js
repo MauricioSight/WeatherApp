@@ -1,10 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect  } from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import moment from 'moment'
 
 import commonStyles from '../commonStyles'
 
 export default props => {
+
+    const [weatherLocation, setweatherLocation] = useState({
+        city: '',
+        description: '',
+        fellsLike: '',
+        temp: '',
+        tempMax: '',
+        tempMin: ''
+    });
+
+    useEffect(() => {
+        setweatherLocation(props.route.params.waether)
+    })
 
     return (
         <View style={style.conteiner}>
@@ -17,11 +31,17 @@ export default props => {
                         <Icon name='ellipsis-v' color='#FFF' size={20}/>
                     </TouchableOpacity>
                 </View>
-                <Text style={style.textWeatherValues}>Recife</Text>
-                <Text style={style.textDate}>Sab 8 de Jan 2020</Text>
-                <View><Text style={style.textTemp}>25°</Text></View>
-                <Text style={style.textWeatherValues}>23°/29° Feels like 25°</Text>
-                <Text style={style.textWeatherValues}>Fair</Text>
+                <Text style={style.textWeatherValues}>{weatherLocation.city}</Text>
+                <Text style={style.textDate}>
+                    {moment(new Date()).locale('pt-br').format('ddd, D [de] MMMM [de] YYYY')}
+                </Text>
+                <View>
+                    <Text style={style.textTemp}>{weatherLocation.temp}°</Text>
+                </View>
+                <Text style={style.textWeatherValues}>
+                    {weatherLocation.tempMin}°/{weatherLocation.tempMax}° Feels like {weatherLocation.feelsLike}°
+                </Text>
+                <Text style={style.textWeatherValues}>{weatherLocation.description}</Text>
             </View>
             <View style={style.content}>
                 <TouchableOpacity>

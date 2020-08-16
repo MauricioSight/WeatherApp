@@ -1,7 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import moment from 'moment'
-import 'moment/locale/pt-br'
 
 import commonStyles from '../commonStyles'
 
@@ -10,7 +9,7 @@ export default props => {
         <View style={style.conteiner}>
             <Text style={style.locationName}>{props.name}</Text>
             <Text style={style.saveDate}>
-                {moment(props.savedAt).locale('pt-br').format('ddd, D [de] MMMM [de] YYYY')}
+                {moment(props.savedAt).format('ddd, D [de] MMMM [de] YYYY')}
             </Text>
         </View>
     )

@@ -3,29 +3,35 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-nativ
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import commonStyles from '../commonStyles'
+import weatherRequest from '../weatherRequest'
 
 export default props => {
     const [city, setCity] = useState('');
 
+    searchCity = async () => {
+        const waether = await weatherRequest(city)
+        props.navigation.navigate('Weather', { waether })
+    }
+    
     return (
         <View style={style.conteiner}>
             <View style={style.searchArea}>
                 <TouchableOpacity onPress={() => props.navigation.goBack()}>
-                    <Icon name='chevron-left' color='#FFF' size={20} style={{ marginLeft: 20, marginRight: 20}}/>
+                    <Icon name='chevron-left' color='#FFF' size={20} 
+                        style={{ marginLeft: 20, marginRight: 20}}/>
                 </TouchableOpacity>
                 <TextInput placeholder="Search by City..." style='inputText'
                     onChangeText={desc => setCity( desc )}
-                    value={city} 
-                    theme={{ colors: { text: theme } }}/>
+                    value={city} />
             </View>
             <View style={style.searchList}>
                 {city !== '' ? 
                     <TouchableOpacity style={style.hairLine} 
-                        onPress={() => props.navigation.navigate('Weather', {city})}>
+                        onPress={searchCity}>
                         <Text style={style.listText}>{city}</Text>
                     </TouchableOpacity> : null
                 }                
-                <TouchableOpacity onPress={() => props.navigation.navigate('Weather')}>
+                <TouchableOpacity onPress={searchCity}>
                     <Text style={style.listText}>My Location</Text>
                 </TouchableOpacity>
             </View>
