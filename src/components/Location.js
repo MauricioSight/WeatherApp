@@ -8,9 +8,9 @@ import commonStyles from '../commonStyles'
 export default props => {
     return (
         <View style={style.conteiner}>
-            <Text style={style.name}>{props.location}</Text>
+            <Text style={style.locationName}>{props.name}</Text>
             <Text style={style.saveDate}>
-                {moment(props.estimateAt).locale('pt-br').format('ddd, D [de] MMMM [de] YYYY')}
+                {moment(props.savedAt).locale('pt-br').format('ddd, D [de] MMMM [de] YYYY')}
             </Text>
         </View>
     )

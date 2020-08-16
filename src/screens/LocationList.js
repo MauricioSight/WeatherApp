@@ -1,12 +1,37 @@
-import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import React, { useState } from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import commonStyles from '../commonStyles'
 import Location from '../components/Location'
 
 export default () => {
-    
+    const [locations, setLocations] = useState([{
+        id: 8,
+        name: 'Home',
+        city: 'Recife',
+        saved: false,
+        savedAt: new Date(),
+        temp: null,
+        feelsLike: null,
+        tempMin: null,
+        tempMax: null,
+        desciption: null
+    },{
+        id: 9,
+        name: 'Mother',
+        city: 'Olinda',
+        saved: false,
+        savedAt: new Date(),
+        temp: null,
+        feelsLike: null,
+        tempMin: null,
+        tempMax: null,
+        desciption: null
+    }])
+
+
+    const render = [...locations]
     return (
         <View style={style.conteiner}>
             <View style={style.header}>
@@ -16,9 +41,12 @@ export default () => {
                 </TouchableOpacity>
             </View>
             <View style={style.content}>
-                <Location name='Recife' saveAt= {new Date()}/>
-                <Location name='Olinda' saveAt= {new Date()}/>
-                <Location name='Rio de Janeiro' saveAt= {new Date()}/>
+                    <FlatList data={render}
+                        keyExtractor={item => `${item.id}`}
+                        renderItem={({ item }) => {
+                           return <Location name={item.name} savedAt={item.savedAt}/>
+                        }} />
+                    
             </View>
         </View>
     )
@@ -41,7 +69,6 @@ const style = StyleSheet.create({
     }, 
     content: {
         flex: 3,
-        alignItems: 'center'
     },
     buttonSearch: {
         width: 50,
