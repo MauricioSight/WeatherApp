@@ -1,36 +1,33 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import commonStyles from '../commonStyles'
 import Location from '../components/Location'
 
-export default props => {
-    const [locations, setLocations] = useState([{
-        id: 8,
-        name: 'Home',
-        city: 'Recife',
-        saved: false,
-        savedAt: new Date(),
-        temp: null,
-        feelsLike: null,
-        tempMin: null,
-        tempMax: null,
-        desciption: null
-    },{
-        id: 9,
-        name: 'Father',
-        city: 'Olinda',
-        saved: false,
-        savedAt: new Date(),
-        temp: null,
-        feelsLike: null,
-        tempMin: null,
-        tempMax: null,
-        desciption: null
-    }])
+const initialState = [{
+    name: '',
+    city: '',
+    savedAt: null
+}]
 
-    const render = [...locations]
+export default props => {
+    const [locationList, setLocationList] = useState([])
+
+    useEffect(() => {
+        if (props.route.params && props.route.params.save) {   
+            favoriteLocation(props.route.params.favorateLocation)
+            props.route.params.save = false
+        }
+    })
+
+    function favoriteLocation(location) {
+        const locations = [ ...locationList ]
+        locations.push(location)
+        setLocationList(locations)
+        console.log(locations)
+    }
+
     return (
         <View style={style.conteiner}>
             <View style={style.header}>
@@ -41,8 +38,8 @@ export default props => {
                 </TouchableOpacity>
             </View>
             <View style={style.content}>
-                    <FlatList data={render}
-                        keyExtractor={item => `${item.id}`}
+                    <FlatList data={locationList}
+                        keyExtractor={item => `${item.savedAt}`}
                         renderItem={({ item }) => {
                            return <Location name={item.name} savedAt={item.savedAt}/>
                         }} />  

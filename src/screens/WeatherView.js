@@ -20,6 +20,16 @@ export default props => {
         setweatherLocation(props.route.params.waether)
     })
 
+    const onFavorate = () => {
+        
+        const favorateLocation = {
+            name: weatherLocation.city,
+            city: weatherLocation.city,
+            savedAt: new Date().getTime()
+        }
+        props.navigation.navigate('List', { favorateLocation, save: true })
+    }
+
     return (
         <View style={style.conteiner}>
             <View style={style.weatherView}>
@@ -44,7 +54,7 @@ export default props => {
                 <Text style={style.textWeatherValues}>{weatherLocation.description}</Text>
             </View>
             <View style={style.content}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={onFavorate}>
                     <View style={style.favorateButton}>
                         <Icon name='star' color='#FFF' size={20}/>
                         <Text style={style.favorateText}>Favorate</Text>

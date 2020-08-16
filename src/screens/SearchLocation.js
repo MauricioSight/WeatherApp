@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert  } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import commonStyles from '../commonStyles'
@@ -10,9 +10,19 @@ export default props => {
 
     searchCity = async () => {
         const waether = await weatherRequest(city)
-        props.navigation.navigate('Weather', { waether })
+        if (waether.err) {
+            Alert.alert(
+                "Ops! Something wrong.",
+                waether.err,
+                [{ text: "OK" }],
+                { cancelable: false }
+            )
+            setCity('')
+        } else {
+          props.navigation.navigate('Weather', { waether })
+        }
     }
-    
+
     return (
         <View style={style.conteiner}>
             <View style={style.searchArea}>

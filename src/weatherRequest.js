@@ -5,11 +5,11 @@ async function getWeather(ciry) {
     try {
         const url = getUrl(ciry)
         const res =  await axios.get(url)
-        
-        return filter(res.data)
-    } catch (err) {
 
-        return null
+        return filter(res.data)
+
+    } catch (err) {
+        return { err: err.response.data.message }
     }
 }
 
