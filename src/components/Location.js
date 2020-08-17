@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import moment from 'moment'
 
 import commonStyles from '../commonStyles'
@@ -7,10 +7,12 @@ import commonStyles from '../commonStyles'
 export default props => {
     return (
         <View style={style.conteiner}>
-            <Text style={style.locationName}>{props.name}</Text>
-            <Text style={style.saveDate}>
-                {moment(props.savedAt).format('ddd, D [de] MMMM [de] YYYY')}
-            </Text>
+            <TouchableOpacity onPress={() => props.weatherView(props)}>
+                <Text style={style.locationName}>{props.name}</Text>
+                <Text style={style.saveDate}>
+                    {props.city} - {moment(props.savedAt).format('ddd, D [de] MMMM [de] YYYY')}
+                </Text>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -29,7 +31,7 @@ const style = StyleSheet.create({
         fontFamily: commonStyles.fontFamily,
         fontSize: 20,
         marginLeft: 30
-    }, 
+    },
     saveDate: {
         color: commonStyles.colors.subText,
         fontFamily: commonStyles.fontFamily,

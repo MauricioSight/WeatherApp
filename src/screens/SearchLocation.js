@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert  } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import commonStyles from '../commonStyles'
@@ -10,7 +10,7 @@ const initialState = ''
 export default props => {
     const [city, setCity] = useState(initialState);
 
-    async function searchCity () {
+    async function searchCity() {
         const weather = await weatherRequest(city)
         if (weather.err) {
             Alert.alert(
@@ -21,7 +21,7 @@ export default props => {
             )
             setCity('')
         } else {
-          props.navigation.navigate('Weather', { weather })
+            props.navigation.navigate('Weather', { weather })
         }
     }
 
@@ -29,21 +29,21 @@ export default props => {
         <View style={style.conteiner}>
             <View style={style.searchArea}>
                 <TouchableOpacity onPress={() => props.navigation.goBack()}>
-                    <Icon name='chevron-left' color='#FFF' size={20} 
-                        style={{ marginLeft: 20, marginRight: 20}}/>
+                    <Icon name='chevron-left' color='#FFF' size={20}
+                        style={{ marginLeft: 20, marginRight: 20 }} />
                 </TouchableOpacity>
                 <TextInput placeholder="Search by City..." style={style.input}
-                    onChangeText={desc => setCity( desc )}
+                    onChangeText={desc => setCity(desc)}
                     placeholderTextColor={'rgba(255, 255, 255, 0.5)'}
                     value={city} />
             </View>
             <View style={style.searchList}>
-                {city !== '' ? 
-                    <TouchableOpacity style={style.hairLine} 
+                {city !== '' ?
+                    <TouchableOpacity style={style.hairLine}
                         onPress={searchCity}>
                         <Text style={style.listText}>{city}</Text>
                     </TouchableOpacity> : null
-                }                
+                }
                 <TouchableOpacity onPress={searchCity}>
                     <Text style={style.listText}>My Location</Text>
                 </TouchableOpacity>
@@ -56,7 +56,7 @@ const style = StyleSheet.create({
     conteiner: {
         flex: 1,
         backgroundColor: commonStyles.colors.backgroundColor
-    }, 
+    },
     searchArea: {
         flexDirection: 'row',
         alignItems: 'center',
