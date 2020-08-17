@@ -24,15 +24,7 @@ export default props => {
     const [weather, setWeather] = useState(initialState)
 
     useEffect(() => {
-        if (props.route.params.weather) {
-            setWeather(props.route.params.weather)
-            props.route.params.weather = null
-        }
-        if (props.route.params.location) {
-
-            weatherRequest(props.route.params.location)
-            props.route.params.location = null
-        }
+        weatherRequest(props.route.params.location)
     })
 
     function onSaveLocation(name) {
@@ -68,7 +60,7 @@ export default props => {
         const data = await weatherRequestServer(location.city)
         if (data.err) {
             Alert.alert("Ops! Something wrong.", data.err,
-                [{ text: "OK", onPress: () => props.navigation.navigate('List') }], { cancelable: false })
+                [{ text: "OK", onPress: () => props.navigation.goBack()}], { cancelable: false })
         } else {
             const weatherNew = { ...location, ...data }
             setWeather(weatherNew)

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import AsyncStorage from '@react-native-community/async-storage';
 
 import commonStyles from '../commonStyles'
 import Location from '../components/Location'
@@ -13,6 +14,7 @@ const initialState = [{
 
 export default props => {
     const [locationList, setLocationList] = useState([])
+    const [localStorege, setLocalStorege] = useState(true)
 
     useEffect(() => {
         if (props.route.params && props.route.params.saveLocation) {
@@ -27,16 +29,30 @@ export default props => {
             deleteLocation(props.route.params.deleteLocation)
             props.route.params.deleteLocation = null
         }
+
     })
 
-    function saveLocation(location) {
-        const locations = [...locationList]
-        locations.push(location)
+    useEffect(() => {
+        getLocalSave()
+    }, [localStorege])
+
+    async function getLocalSave() {
+        const locationString = await AsyncStorage.getItem('LocationList')
+        const locations = JSON.parse(locationString)
         setLocationList(locations)
+        console.log(locations)
+        setLocalStorege(false)
     }
 
-    function editLocation({id, name}) {
-        console.log()
+    async function saveLocation(location) {
+        const locations = [...locationList]
+        locations.push(location)
+        await AsyncStorage.setItem('LocationList', JSON.stringify(locations))
+        setLocationList(locations)
+        setLocalStorege(true)
+    }
+
+    async function editLocation({id, name}) {
         let locations = [...locationList]
         locations = locations.map(location => {
             if (location.id == id) {
@@ -45,13 +61,17 @@ export default props => {
             }
             return location
         })
+        await AsyncStorage.setItem('LocationList', JSON.stringify(locationList))
         setLocationList(locations)
+        setLocalStorege(true)
     }
 
-    function deleteLocation({id}) {
+    async function deleteLocation({id}) {
         let locations = [...locationList]
         locations = locations.filter(location => location.id != id)
+        await AsyncStorage.setItem('LocationList', JSON.stringify(locations))
         setLocationList(locations)
+        setLocalStorege(true)
     }
 
     function openWeatherView(item) {
