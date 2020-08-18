@@ -63,10 +63,10 @@ export default props => {
 
     function onWeatherView(item) {
         let location = { ...item }
+        location.selfDelete = null
         location.openWeatherView = null
-        
-        console.log(location)
-        //props.navigation.navigate('Weather', { location })
+
+        props.navigation.navigate('Weather', { location })
     }
 
     return (
@@ -84,7 +84,8 @@ export default props => {
                 <FlatList data={locationList}
                     keyExtractor={item => `${item.id}`}
                     renderItem={({ item }) => {
-                        return <Location {...item} openWeatherView={onWeatherView} />
+                        return <Location {...item} openWeatherView={onWeatherView}
+                            selfDelete={deleteLocation} />
                     }} />
             </View>
         </View>

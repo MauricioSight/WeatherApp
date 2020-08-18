@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import weatherRequestServer from '../weatherRequest'
 import WeatherDisplay from '../components/WeatherDisplay'
 import commonStyles from '../commonStyles'
-import SaveLocation from './SaveLocation'
+import SaveLocation from './Save'
 import Options from './Options'
 
 const initialState = {
