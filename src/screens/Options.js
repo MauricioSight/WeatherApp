@@ -1,15 +1,6 @@
-import React, { useState } from 'react'
-import {
-    Modal,
-    View,
-    Text,
-    StyleSheet,
-    TouchableWithoutFeedback,
-    TouchableOpacity
-} from 'react-native'
+import React from 'react'
+import { Modal, View, Text, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native'
 import commonStyles from '../commonStyles'
-
-const initalState = ''
 
 export default props => {
 
@@ -66,9 +57,9 @@ const style = StyleSheet.create({
         flex: 1,
     },
     buttons: {
+        justifyContent: 'space-between',
         backgroundColor: commonStyles.colors.backgroundColorGray,
         borderRadius: 25,
-        justifyContent: 'space-between',
         paddingLeft: 20,
         paddingTop: 20,
         paddingRight: 20,

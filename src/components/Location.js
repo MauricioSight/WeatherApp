@@ -7,7 +7,7 @@ import commonStyles from '../commonStyles'
 export default props => {
     return (
         <View style={style.conteiner}>
-            <TouchableOpacity onPress={() => props.weatherView(props)}>
+            <TouchableOpacity onPress={() => props.openWeatherView(props)}>
                 <Text style={style.locationName}>{props.name}</Text>
                 <Text style={style.saveDate}>
                     {props.city} - {moment(props.savedAt).format('ddd, D [de] MMMM [de] YYYY')}

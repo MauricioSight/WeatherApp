@@ -6,15 +6,12 @@ import AsyncStorage from '@react-native-community/async-storage';
 import commonStyles from '../commonStyles'
 import Location from '../components/Location'
 
-const initialState = [{
-    name: '',
-    city: '',
-    savedAt: null
-}]
-
 export default props => {
     const [locationList, setLocationList] = useState([])
-    const [localStorege, setLocalStorege] = useState(true)
+
+    useEffect(() => {
+        getLocalSave()
+    }, [])
 
     useEffect(() => {
         if (props.route.params && props.route.params.saveLocation) {
@@ -29,55 +26,47 @@ export default props => {
             deleteLocation(props.route.params.deleteLocation)
             props.route.params.deleteLocation = null
         }
-
     })
-
-    useEffect(() => {
-        getLocalSave()
-    }, [localStorege])
 
     async function getLocalSave() {
         const locationString = await AsyncStorage.getItem('LocationList')
         const locations = JSON.parse(locationString)
         setLocationList(locations)
-        console.log(locations)
-        setLocalStorege(false)
     }
 
-    async function saveLocation(location) {
-        const locations = [...locationList]
-        locations.push(location)
-        await AsyncStorage.setItem('LocationList', JSON.stringify(locations))
-        setLocationList(locations)
-        setLocalStorege(true)
+    function saveLocation(location) {
+        const cloneList = [...locationList]
+        cloneList.push(location)
+        setLocationList(cloneList)
+        AsyncStorage.setItem('LocationList', JSON.stringify(cloneList))
     }
 
-    async function editLocation({id, name}) {
-        let locations = [...locationList]
-        locations = locations.map(location => {
+    function editLocation({ id, name }) {
+        const cloneList = [...locationList]
+        const newList = cloneList.map(location => {
             if (location.id == id) {
                 location.name = name
                 return location
             }
             return location
         })
-        await AsyncStorage.setItem('LocationList', JSON.stringify(locationList))
-        setLocationList(locations)
-        setLocalStorege(true)
+        setLocationList(newList)
+        AsyncStorage.setItem('LocationList', JSON.stringify(newList))
     }
 
-    async function deleteLocation({id}) {
-        let locations = [...locationList]
-        locations = locations.filter(location => location.id != id)
-        await AsyncStorage.setItem('LocationList', JSON.stringify(locations))
-        setLocationList(locations)
-        setLocalStorege(true)
+    function deleteLocation({ id }) {
+        const cloneList = [...locationList]
+        const newList = cloneList.filter(location => location.id != id)
+        setLocationList(newList)
+        AsyncStorage.setItem('LocationList', JSON.stringify(newList))
     }
 
-    function openWeatherView(item) {
+    function onWeatherView(item) {
         let location = { ...item }
-        location.weatherView = null
-        props.navigation.navigate('Weather', { location })
+        location.openWeatherView = null
+        
+        console.log(location)
+        //props.navigation.navigate('Weather', { location })
     }
 
     return (
@@ -86,16 +75,16 @@ export default props => {
                 <Text style={style.headerText}>Weather App</Text>
                 <TouchableOpacity style={style.buttonSearch}
                     onPress={() => props.navigation.navigate('Search')} >
-                    <View style={{ height: 25, width: 25, borderRadius: 12 }}>
+                    <View>
                         <Icon name='plus' color='#FFF' size={20} />
                     </View>
                 </TouchableOpacity>
             </View>
-            <View style={style.content}>
+            <View style={style.list}>
                 <FlatList data={locationList}
                     keyExtractor={item => `${item.id}`}
                     renderItem={({ item }) => {
-                        return <Location {...item} weatherView={openWeatherView} />
+                        return <Location {...item} openWeatherView={onWeatherView} />
                     }} />
             </View>
         </View>
@@ -117,7 +106,7 @@ const style = StyleSheet.create({
         color: commonStyles.colors.mainText,
         fontSize: 30,
     },
-    content: {
+    list: {
         flex: 3,
     },
     buttonSearch: {

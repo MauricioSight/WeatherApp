@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
-import {
-    Modal,
-    View,
-    Text,
-    TextInput,
-    StyleSheet,
-    TouchableWithoutFeedback,
+import React, { useState, useEffect } from 'react'
+import { 
+    Modal, 
+    View, 
+    Text, 
+    TextInput, 
+    StyleSheet, 
+    TouchableWithoutFeedback, 
     TouchableOpacity,
     Alert
 } from 'react-native'
@@ -15,13 +15,12 @@ const initalState = ''
 
 export default props => {
     const [name, setName] = useState(initalState)
-
+    
     function save () {
         if (!name.trim()) {
             Alert.alert('Invalid data', 'Insert the location name')
             return
         }
-
         props.onSave(name)
     }
 
@@ -67,10 +66,11 @@ const style = StyleSheet.create({
         fontFamily: commonStyles.fontFamily,
         fontSize: 30,
         color: commonStyles.colors.mainText,
-        marginLeft: 20,
+        marginLeft: 25,
         marginTop: 30
     },
     input: {
+        alignSelf: 'center',
         fontFamily: commonStyles.fontFamily,
         width: '90%',
         height: 40,
