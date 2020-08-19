@@ -1,31 +1,46 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native'
 import moment from 'moment'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import commonStyles from '../commonStyles'
+import GetNameView from '../screens/Save'
 
 export default props => {
+    const [getName, setGetName] = useState(false)
 
     function onSelfDelete() {
         Alert.alert(`Delete ${props.name} location ?`, 'This action will delete the location',
-                [{ text: "DELETE", 
-                    onPress: () => props.selfDelete(props) 
-                },
-                { text: "Calcel" }], { cancelable: false })
+            [{
+                text: "DELETE",
+                onPress: () => props.selfDelete(props)
+            },
+            { text: "Calcel" }], { cancelable: false })
     }
-    
+
+    function onSelfEdit(name) {
+        if (name) {
+            setGetName(false)
+            props.selfEdit({id: props.id, name: name})
+        } else {
+            setGetName(true)
+        }
+    }
+
     const getRightContent = () => {
         return (
             <View style={style.rightButtons}>
-                <TouchableOpacity onPress={() => console.log('Edit')}>
-                    <View style={{alignItems: 'center', justifyContent: 'center', padding: 20}}>
+                <GetNameView isVisible={getName}
+                    onSave={onSelfEdit}
+                    onCancel={() => useState(false)} />
+                <TouchableOpacity onPress={() => setGetName(true)}>
+                    <View style={{ alignItems: 'center', justifyContent: 'center', padding: 20 }}>
                         <Icon name='pencil' size={20} color='#FFF' />
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={onSelfDelete}>
-                    <View style={{alignItems: 'center', justifyContent: 'center', padding: 20}}>
+                    <View style={{ alignItems: 'center', justifyContent: 'center', padding: 20 }}>
                         <Icon name='trash' size={20} color='#FFF' />
                     </View>
                 </TouchableOpacity>

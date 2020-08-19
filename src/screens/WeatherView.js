@@ -68,7 +68,7 @@ export default props => {
     }
 
     return (
-        <View style={style.conteiner}>
+        <View style={style.container}>
             {weather.city ? (
                 <>
                     <View style={style.weatherView}>
@@ -89,9 +89,9 @@ export default props => {
                     <View style={style.content}>
                         {!weather.id ? (
                             <TouchableOpacity onPress={() => setSaveScreen(true)}>
-                                <View style={style.favorateButton}>
+                                <View style={style.favoriteButton}>
                                     <Icon name='star' color='#FFF' size={20} />
-                                    <Text style={style.favorateText}>Favorate</Text>
+                                    <Text style={style.favoriteText}>Favorite</Text>
                                 </View>
                             </TouchableOpacity> ) : null
                         }
@@ -113,7 +113,7 @@ export default props => {
 }
 
 const style = StyleSheet.create({
-    conteiner: {
+    container: {
         flex: 1,
         justifyContent: 'center',
         backgroundColor: commonStyles.colors.backgroundColor
@@ -126,13 +126,13 @@ const style = StyleSheet.create({
         borderRadius: 12
     },
     options: {
+        marginTop: 20,
         width: '90%',
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
     weatherView: {
         flex: 2,
-        justifyContent: 'center',
         alignItems: 'center'
     },
     content: {
@@ -140,7 +140,7 @@ const style = StyleSheet.create({
         justifyContent: 'flex-end',
         alignItems: 'center'
     },
-    favorateButton: {
+    favoriteButton: {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
@@ -152,7 +152,7 @@ const style = StyleSheet.create({
         paddingLeft: 20,
         marginBottom: 40
     },
-    favorateText: {
+    favoriteText: {
         fontFamily: commonStyles.fontFamily,
         color: commonStyles.colors.mainText,
         fontSize: 25,

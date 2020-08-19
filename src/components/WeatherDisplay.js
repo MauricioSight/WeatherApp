@@ -12,7 +12,7 @@ export default props => {
         <>
             <Text style={style.textWeatherValues}>{props.weather.city}</Text>
             <Text style={style.textDate}>
-                {moment(new Date()).locale('pt-br').format('ddd, D [de] MMMM [de] YYYY')}
+                {moment().locale('pt-br').format('ddd, D [de] MMMM [de] YYYY')}
             </Text>
             <View>
                 <Text style={style.textTemp}>{props.weather.temp}°</Text>

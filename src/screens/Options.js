@@ -24,7 +24,7 @@ export default props => {
             return (
                 <TouchableOpacity onPress={() => props.onSave('')}>
                     <View>
-                        <Text style={style.buttonText}> Fovorite </Text>
+                        <Text style={style.buttonText}> Favorite </Text>
                     </View>
                 </TouchableOpacity>
             )

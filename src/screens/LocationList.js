@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-community/async-storage'
 
+import getName from './Save'
 import commonStyles from '../commonStyles'
 import Location from '../components/Location'
 
 export default props => {
     const [locationList, setLocationList] = useState([])
+    const [currentItem, setCurrentItem] = useState([])
 
     useEffect(() => {
         getLocalSave()
@@ -85,7 +87,7 @@ export default props => {
                     keyExtractor={item => `${item.id}`}
                     renderItem={({ item }) => {
                         return <Location {...item} openWeatherView={onWeatherView}
-                            selfDelete={deleteLocation} />
+                            selfDelete={deleteLocation} selfEdit={editLocation}/>
                     }} />
             </View>
         </View>
