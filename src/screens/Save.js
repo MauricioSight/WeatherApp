@@ -32,7 +32,7 @@ export default props => {
                 <View style={style.offset}/>
             </TouchableWithoutFeedback>
             <View style={style.container}>
-                <Text style={style.title}>Localion name</Text>
+                <Text style={style.title}>Location name</Text>
                 <TextInput placeholder="Insert the location name..." style={style.input}
                     onChangeText={desc => setName( desc )}
                     value={name} />

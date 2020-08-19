@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, Alert } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import AsyncStorage from '@react-native-community/async-storage'
 
@@ -37,8 +37,14 @@ export default props => {
     }
 
     function saveLocation(location) {
-        const cloneList = [...locationList]
-        cloneList.push(location)
+        let cloneList = []
+        if (locationList != null) {
+            cloneList = locationList
+            cloneList.push(location)
+            const sortList = sortBySavedAt(cloneList)
+        } else {
+            cloneList = [location]
+        }
         setLocationList(cloneList)
         AsyncStorage.setItem('LocationList', JSON.stringify(cloneList))
     }
@@ -72,6 +78,15 @@ export default props => {
         props.navigation.navigate('Weather', { location })
     }
 
+    function sortBySavedAt(list) {
+        list.sort(function (a, b) {
+            if (a.savedAt > b.savedAt) return -1
+            if (a.savedAt < b.savedAt) return 1
+            return 0
+        })
+        return list
+    }
+
     return (
         <View style={style.conteiner}>
             <View style={style.header}>
@@ -88,7 +103,7 @@ export default props => {
                     keyExtractor={item => `${item.id}`}
                     renderItem={({ item }) => {
                         return <Location {...item} openWeatherView={onWeatherView}
-                            selfDelete={deleteLocation} selfEdit={editLocation}/>
+                            selfDelete={deleteLocation} selfEdit={editLocation} />
                     }} />
             </View>
         </View>

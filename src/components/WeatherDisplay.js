@@ -15,15 +15,15 @@ export default props => {
                 <Icon name='map-marker' color='#FFF' size={20} />
                 <Text style={style.textWeatherValues}>{props.weather.city}</Text>
             </View>
-            <Text style={style.textDate}>
+            {/*<Text style={style.textDate}>
                 {moment().locale('pt-br').format('ddd, D [de] MMMM [de] YYYY')}
-            </Text>
+            </Text>*/}
             <View  style={{flexDirection: 'row', alignItems: 'center'}}>
                 <Icon name={getIcon(props.weather.icon, props.weather.sunSet, new Date().getTime())} color='#FFF' size={50}/>
-                <Text style={style.textTemp}>{props.weather.temp.toFixed(0)}°</Text>
+                <Text style={style.textTemp}>{props.weather.temp}°</Text>
             </View>
             <Text style={style.textWeatherValues}>
-                {props.weather.tempMin.toFixed(0)}°/{props.weather.tempMax.toFixed(0)}° Feels like {props.weather.feelsLike.toFixed(0)}°
+                {props.weather.tempMin}°/{props.weather.tempMax}° Feels like {props.weather.feelsLike}°
                         </Text>
             <Text style={style.textWeatherValues}>{props.weather.description}</Text>
         </>
