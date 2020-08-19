@@ -33,7 +33,7 @@ export default props => {
             <View style={style.rightButtons}>
                 <GetNameView isVisible={getName}
                     onSave={onSelfEdit}
-                    onCancel={() => useState(false)} />
+                    onCancel={() => setGetName(false)} />
                 <TouchableOpacity onPress={() => setGetName(true)}>
                     <View style={{ alignItems: 'center', justifyContent: 'center', padding: 20 }}>
                         <Icon name='pencil' size={20} color='#FFF' />

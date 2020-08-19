@@ -22,8 +22,9 @@ export default props => {
             zoomEnabled={true}
             showsUserLocation
             loadingEnabled
+            showsMyLocationButton={false}
             customMapStyle={MapStyle}
-            onPress={e => props.updateMarker(false, { ...e.nativeEvent.coordinate })}>
+            onPress={e => props.updateMarker ? props.updateMarker(false, { ...e.nativeEvent.coordinate }) : null}>
             <Marker
                 coordinate={{
                     latitude: props.markerCoord.latitude,

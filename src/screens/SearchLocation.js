@@ -97,7 +97,7 @@ const style = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         borderRadius: 20,
-        backgroundColor: commonStyles.colors.backgroundColorGray,
+        backgroundColor: commonStyles.colors.backgroundTransparent,
         marginTop: 5,
         marginBottom: 10
     },
@@ -109,7 +109,7 @@ const style = StyleSheet.create({
     },
     searchList: {
         justifyContent: 'center',
-        backgroundColor: commonStyles.colors.backgroundColorGray,
+        backgroundColor: commonStyles.colors.backgroundTransparent,
         borderRadius: 20,
         paddingLeft: 20,
         paddingRight: 20

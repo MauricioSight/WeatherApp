@@ -66,6 +66,7 @@ export default props => {
     function onWeatherView(item) {
         let location = { ...item }
         location.selfDelete = null
+        location.selfEdit = null
         location.openWeatherView = null
 
         props.navigation.navigate('Weather', { location })

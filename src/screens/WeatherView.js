@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import weatherRequestServer from '../weatherRequest'
 import WeatherDisplay from '../components/WeatherDisplay'
 import commonStyles from '../commonStyles'
+import Map from '../components/Map'
 import SaveLocation from './Save'
 import Options from './Options'
 
@@ -54,15 +55,16 @@ export default props => {
 
     function onEditLocation(name) {
         const editWaether = { id: weather.id, name }
-        setOptions(false, 
+        setOptions(false,
             props.navigation.navigate('List', { editLocation: editWaether }))
     }
 
     function onDeleteLocation() {
         setOptions(false,
             Alert.alert(`Delete ${weather.name} location ?`, 'This action will delete the location',
-                [{ text: "DELETE", 
-                    onPress: () => props.navigation.navigate('List', { deleteLocation: weather }) 
+                [{
+                    text: "DELETE",
+                    onPress: () => props.navigation.navigate('List', { deleteLocation: weather })
                 },
                 { text: "Calcel" }], { cancelable: false }))
     }
@@ -71,43 +73,52 @@ export default props => {
         <View style={style.container}>
             {weather.city ? (
                 <>
-                    <View style={style.weatherView}>
-                        <View style={style.options}>
-                            <TouchableOpacity onPress={() => props.navigation.goBack()}>
-                                <View style={style.icons}>
-                                    <Icon name='chevron-left' color='#FFF' size={20} />
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress={() => setOptions(true)}>
-                                <View style={style.icons}>
-                                    <Icon name='ellipsis-v' color='#FFF' size={20} />
-                                </View>
-                            </TouchableOpacity>
+                    <Map markerCoord={{ latitude: weather.coord.latitude, longitude: weather.coord.longitude }} />
+
+                    <View style={{ position: 'absolute', width: '100%', height: '100%' }}>
+                        <View style={style.weatherView}>
+                            <View style={style.options}>
+                                <TouchableOpacity onPress={() => props.navigation.goBack()}>
+                                    <View style={style.icons}>
+                                        <Icon name='chevron-left' color='#FFF' size={20} />
+                                    </View>
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => setOptions(true)}>
+                                    <View style={style.icons}>
+                                        <Icon name='ellipsis-v' color='#FFF' size={20} />
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={style.display} >
+                                <WeatherDisplay weather={weather} />
+                            </View>
                         </View>
-                        <WeatherDisplay weather={weather}/>
-                    </View>
-                    <View style={style.content}>
-                        {!weather.id ? (
-                            <TouchableOpacity onPress={() => setSaveScreen(true)}>
-                                <View style={style.favoriteButton}>
-                                    <Icon name='star' color='#FFF' size={20} />
-                                    <Text style={style.favoriteText}>Favorite</Text>
-                                </View>
-                            </TouchableOpacity> ) : null
+                        <View style={{ flex: 3 }}></View>
+                        {!weather.id ?
+                            <View style={{ bottom: 30 }}>
+                                <TouchableOpacity onPress={() => setSaveScreen(true)}>
+                                    <View style={style.favoriteButton}>
+                                        <Icon name='star' color='#FFF' size={20} />
+                                        <Text style={style.favoriteText}>Favorite</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                            : null
                         }
                     </View>
-                    <SaveLocation isVisible={saveScreen}
-                        onSave={weather.id ?
-                            onEditLocation : onSaveLocation}
-                        onCancel={() => setSaveScreen(false)} />
-                    <Options isVisible={options}
-                        saved={weather.id ? true : false}
-                        onSave={onSaveLocation}
-                        onEdit={() => setOptions(false, setSaveScreen(true))}
-                        onDelete={onDeleteLocation}
-                        onCancel={() => setOptions(false)} />
                 </>
-            ) : <ActivityIndicator size='large' color='#FFF' style={{alignSelf:'center'}}/>}
+
+            ) : <ActivityIndicator size='large' color='#FFF' style={{ alignSelf: 'center' }} />}
+            <SaveLocation isVisible={saveScreen}
+                onSave={weather.id ?
+                    onEditLocation : onSaveLocation}
+                onCancel={() => setSaveScreen(false)} />
+            <Options isVisible={options}
+                saved={weather.id ? true : false}
+                onSave={onSaveLocation}
+                onEdit={() => setOptions(false, setSaveScreen(true))}
+                onDelete={onDeleteLocation}
+                onCancel={() => setOptions(false)} />
         </View >
     )
 }
@@ -126,36 +137,47 @@ const style = StyleSheet.create({
         borderRadius: 12
     },
     options: {
-        marginTop: 20,
-        width: '90%',
+        width: '100%',
+        paddingHorizontal: 20,
+        paddingVertical: 7,
         flexDirection: 'row',
         justifyContent: 'space-between',
+        backgroundColor: commonStyles.colors.backgroundTransparent,
+    },
+    display: {
+        width: '100%',
+        backgroundColor: commonStyles.colors.backgroundTransparent,
+        alignItems: 'center',
+        paddingHorizontal: 25,
+        paddingBottom: 25,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
     },
     weatherView: {
         flex: 2,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     content: {
-        flex: 3,
-        justifyContent: 'flex-end',
-        alignItems: 'center'
+        flex: 3
     },
     favoriteButton: {
+        width: '100%',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: commonStyles.colors.backgroundColorGray,
         borderRadius: 20,
-        paddingTop: 10,
-        paddingRight: 20,
-        paddingBottom: 10,
-        paddingLeft: 20,
-        marginBottom: 40
+        paddingVertical: 10,
+        backgroundColor: commonStyles.colors.backgroundTransparent,
     },
     favoriteText: {
         fontFamily: commonStyles.fontFamily,
         color: commonStyles.colors.mainText,
         fontSize: 25,
         marginLeft: 10
+    },
+    map: {
+        flex: 1,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20
     }
 })

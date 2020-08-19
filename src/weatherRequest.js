@@ -40,6 +40,8 @@ function filter(data) {
         tempMax: data.main.temp_max,
         description: data.weather[0].description,
         icon: data.weather[0].icon,
+        sunRise: data.sys.sunrise,
+        sunSet: data.sys.sunset,
         coord: {
             latitude: data.coord.lat,
             longitude: data.coord.lon,
