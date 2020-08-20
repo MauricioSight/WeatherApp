@@ -35,7 +35,7 @@ export default props => {
     }
 
     function searchWeatherSelected() {
-        if (markedLocation.city == city.trim()) {
+        if (markedLocation.city.toLowerCase() == city.trim().toLowerCase()) {
             props.navigation.navigate('Weather', { location: { coord: markedLocation.coord } })
         } else {
             Alert.alert('Ops! Something is wrong.',  "The City you selected is not marked on the map or doesn't exist. Pleas, mark the city you want in the map.",
