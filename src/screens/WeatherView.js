@@ -73,8 +73,9 @@ export default props => {
                                         <Icon name='chevron-left' color='#FFF' size={20} />
                                     </View>
                                 </TouchableOpacity>
+                                {weather.name ? <Text style={style.locationName}>{weather.name}</Text> : null}
                                 <TouchableOpacity onPress={() => setOptions(true)}>
-                                    <View style={style.icons}>
+                                    <View style={[style.icons, {alignSelf: 'flex-end'}]}>
                                         <Icon name='ellipsis-v' color='#FFF' size={20} />
                                     </View>
                                 </TouchableOpacity>
@@ -123,8 +124,14 @@ const style = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 10,
         flexDirection: 'row',
+        alignItems: 'center',
         justifyContent: 'space-between',
         backgroundColor: commonStyles.colors.backgroundTransparent,
+    },
+    locationName: {
+        fontFamily: commonStyles.fontFamily,
+        color: commonStyles.colors.mainText,
+        fontSize: 17
     },
     icons: {
         alignItems: 'center',
