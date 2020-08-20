@@ -9,6 +9,7 @@ import {
     TouchableOpacity,
     Alert
 } from 'react-native'
+
 import commonStyles from '../commonStyles'
 
 const initalState = ''

@@ -20,7 +20,7 @@ export default props => {
                 async ({ coords: { latitude, longitude } }) => {
                     setMyLocation({ coord: { latitude, longitude } })
                 },
-                err => Alert.alert('Ops! Something went wrong.', `${err.message}`,
+                err => Alert.alert('Ops! Something went wrong.', `${err.message} Pleas, restart the app`,
                     [{ text: 'OK' }], { cancelable: false })
             )
         }

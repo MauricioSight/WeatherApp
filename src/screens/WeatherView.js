@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, Alert } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-import weatherRequestServer from '../weatherRequest'
+import weatherRequestServer from '../functions/weatherRequest'
 import WeatherDisplay from '../components/WeatherDisplay'
 import commonStyles from '../commonStyles'
 import Map from '../components/Map'

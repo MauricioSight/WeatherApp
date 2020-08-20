@@ -1,6 +1,7 @@
 import axios from 'axios'
-import { getUrlByCity, getUrlByCoord } from './common'
 import { Alert } from 'react-native'
+
+import { getUrlByCity, getUrlByCoord } from '../common'
 
 async function getWeather(city, coord) {
     const url = city ? getUrlByCity(city) : getUrlByCoord(coord)

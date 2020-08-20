@@ -3,9 +3,9 @@ import { SafeAreaView } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import LocationList from '../screens/LocationList'
-import SearchLocation from '../screens/SearchLocation'
-import WatherView from '../screens/WeatherView'
+import LocationList from './screens/LocationList'
+import SearchLocation from './screens/SearchLocation'
+import WatherView from './screens/WeatherView'
 
 const Stack = createStackNavigator()
 

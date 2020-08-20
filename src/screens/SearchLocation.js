@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-import requestServerData, { getWatherWithoutCatch } from '../weatherRequest'
+import requestServerData, { getWatherWithoutCatch } from '../functions/weatherRequest'
 import commonStyles from '../commonStyles'
 import Map from '../components/Map'
 
