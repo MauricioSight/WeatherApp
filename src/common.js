@@ -33,7 +33,7 @@ function getIcon(iconServer, sunSet, currentTime) {
     const iconName = 'i' + iconServer.substr(0, 2)
 
     if (iconName == 'i02' || iconName == 'i01' || iconName == 'i10') {
-        if (currentTime < sunSet) {
+        if (currentTime < sunSet * 1000) {
             return icon[iconName].sun
         } else {
             return icon[iconName].moon
@@ -42,4 +42,8 @@ function getIcon(iconServer, sunSet, currentTime) {
     return icon[iconName]
 }
 
-export { getUrlByCity, getUrlByCoord,  getIcon}
+function utcToTimezoneDate(date, timerzone) {
+    return date * 1000 + timerzone * 1000
+}
+
+export { getUrlByCity, getUrlByCoord,  getIcon, utcToTimezoneDate }

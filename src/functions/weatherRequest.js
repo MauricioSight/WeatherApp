@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Alert } from 'react-native'
 
-import { getUrlByCity, getUrlByCoord } from '../common'
+import { getUrlByCity, getUrlByCoord, utcToTimezoneDate } from '../common'
 
 async function getWeather(city, coord) {
     const url = city ? getUrlByCity(city) : getUrlByCoord(coord)
@@ -38,8 +38,9 @@ function filter(data) {
         tempMax: data.main.temp_max,
         description: data.weather[0].description,
         icon: data.weather[0].icon,
-        sunRise: data.sys.sunrise,
-        sunSet: data.sys.sunset,
+        localTime: utcToTimezoneDate(data.dt, data.timezone),
+        sunRise: utcToTimezoneDate(data.sys.sunrise, data.timezone),
+        sunSet: utcToTimezoneDate(data.sys.sunset, data.timezone),
         coord: {
             latitude: data.coord.lat,
             longitude: data.coord.lon,

@@ -6,7 +6,6 @@ import moment from 'moment'
 import commonStyles from '../commonStyles'
 import { getIcon } from '../common'
 
-
 export default props => {
     const weather = props.weather
     const iconName = getIcon(weather.icon, weather.sunSet, new Date().getTime())
@@ -18,7 +17,7 @@ export default props => {
                 <Text style={style.textWeatherValues}>{weather.city}</Text>
             </View>
             <Text style={style.textDate}>
-                {moment().format('ddd, MMM D h:mm a')}
+                {moment(weather.localTime).format('ddd, MMM D h:mm a')}
             </Text>
             <View  style={{flexDirection: 'row', alignItems: 'center'}}>
                 <Icon name={iconName} color='#FFF' size={50}/>
