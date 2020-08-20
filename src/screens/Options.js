@@ -5,7 +5,7 @@ import commonStyles from '../commonStyles'
 export default props => {
 
     function mode() {
-        if (props.saved) {
+        if (props.mode) {
             return (
                 <>
                     <TouchableOpacity onPress={() => props.onEdit()}>

@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { getUrlCity, getUrlCords } from './common'
+import { getUrlByCity, getUrlByCoord } from './common'
 import { Alert } from 'react-native'
 
 async function getWeather(city, coord) {
-    const url = city ? getUrlCity(city) : getUrlCords(coord)
+    const url = city ? getUrlByCity(city) : getUrlByCoord(coord)
 
     try {
         const res = await axios.get(url)
@@ -11,24 +11,21 @@ async function getWeather(city, coord) {
         return filter(res.data)
 
     } catch (err) {
-        console.error(err)
-        Alert.alert("Ops! Something wrong.", '',
-            [{ text: "OK" }], { cancelable: false })
+        Alert.alert('Ops! Something wrong.', `${err}`,
+            [{ text: 'OK' }], { cancelable: false })
         return null
     }
 }
 
 async function getWatherWithoutCatch(city, coord) {
-    const url = city ? getUrlCity(city) : getUrlCords(coord)
+    const url = city ? getUrlByCity(city) : getUrlByCoord(coord)
 
     try {
         const res = await axios.get(url)
         
         return filter(res.data)
 
-    } catch (err) {
-
-    }
+    } catch (err) {}
 }
 
 function filter(data) {

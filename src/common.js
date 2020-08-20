@@ -12,24 +12,27 @@ const icon = {
     i03: 'cloud',
     i04: 'cloud',
     i09: 'cloud-showers-heavy',
-    i10: 'cloud-rain',
+    i10: {
+        sun: 'cloud-sun-rain',
+        moon: 'cloud-moon-rain'
+    },
     i11: 'bolt',
     i13: 'snowflake',
     i50: 'smog',
 }
 
-function getUrlCity(city) {
+function getUrlByCity(city) {
     return `${serverUrl}q=${city}&appid=${apiKey}&units=metric`
 }
 
-function getUrlCords(coords) {
+function getUrlByCoord(coords) {
     return `${serverUrl}lat=${coords.latitude}&lon=${coords.longitude}&appid=${apiKey}&units=metric`
 }
 
 function getIcon(iconServer, sunSet, currentTime) {
     const iconName = 'i' + iconServer.substr(0, 2)
 
-    if (iconName == 'clearsky' || iconName == 'fewclouds') {
+    if (iconName == 'i02' || iconName == 'i01' || iconName == 'i10') {
         if (currentTime < sunSet) {
             return icon[iconName].sun
         } else {
@@ -39,4 +42,4 @@ function getIcon(iconServer, sunSet, currentTime) {
     return icon[iconName]
 }
 
-export { getUrlCity, getUrlCords,  getIcon}
+export { getUrlByCity, getUrlByCoord,  getIcon}

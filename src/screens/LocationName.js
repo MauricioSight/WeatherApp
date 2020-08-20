@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { 
     Modal, 
     View, 
@@ -33,15 +33,15 @@ export default props => {
             </TouchableWithoutFeedback>
             <View style={style.container}>
                 <Text style={style.title}>Location name</Text>
-                <TextInput placeholder="Insert the location name..." style={style.input}
+                <TextInput placeholder='Insert the location name...' style={style.input}
                     onChangeText={desc => setName( desc )}
                     value={name} />
                 <View style={style.buttonView}>
                     <TouchableOpacity onPress={props.onCancel}>
-                        <Text style={style.button}>Cancelar</Text>
+                        <Text style={style.button}>Cancel</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={save}>
-                        <Text style={style.button}>Salvar</Text>
+                        <Text style={style.button}>Save</Text>
                     </TouchableOpacity>
                 </View> 
             </View>

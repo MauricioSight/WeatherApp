@@ -2,21 +2,21 @@ import React, { useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native'
 import moment from 'moment'
 import Swipeable from 'react-native-gesture-handler/Swipeable'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/FontAwesome5'
 
 import commonStyles from '../commonStyles'
-import GetNameView from '../screens/Save'
+import GetNameView from '../screens/LocationName'
 
 export default props => {
     const [getName, setGetName] = useState(false)
 
     function onSelfDelete() {
-        Alert.alert(`Delete ${props.name} location ?`, 'This action will delete the location',
+        Alert.alert(`Delete ${props.name} location?`, 'This action will delete the location',
             [{
-                text: "DELETE",
+                text: 'DELETE',
                 onPress: () => props.selfDelete(props)
             },
-            { text: "Calcel" }], { cancelable: false })
+            { text: 'Cancel' }], { cancelable: false })
     }
 
     function onSelfEdit(name) {
@@ -28,7 +28,7 @@ export default props => {
         }
     }
 
-    const getRightContent = () => {
+    function getRightContent() {
         return (
             <View style={style.rightButtons}>
                 <GetNameView isVisible={getName}
@@ -36,12 +36,12 @@ export default props => {
                     onCancel={() => setGetName(false)} />
                 <TouchableOpacity onPress={() => setGetName(true)}>
                     <View style={{ alignItems: 'center', justifyContent: 'center', padding: 20 }}>
-                        <Icon name='pencil' size={20} color='#FFF' />
+                        <Icon name='pen' color='#FFF' size={20}/>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={onSelfDelete}>
                     <View style={{ alignItems: 'center', justifyContent: 'center', padding: 20 }}>
-                        <Icon name='trash' size={20} color='#FFF' />
+                        <Icon name='trash' color='#F00' size={20}/>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -49,13 +49,12 @@ export default props => {
     }
 
     return (
-        <Swipeable
-            renderRightActions={getRightContent}>
+        <Swipeable renderRightActions={getRightContent}>
             <View style={style.conteiner}>
                 <TouchableOpacity onPress={() => props.openWeatherView(props)}>
                     <Text style={style.locationName}>{props.name}</Text>
                     <Text style={style.saveDate}>
-                        {props.city} - {moment(props.savedAt).format('ddd, D [de] MMMM [de] YYYY')}
+                        {props.city} - {moment(props.savedAt).format('ddd, MMM D')}
                     </Text>
                 </TouchableOpacity>
             </View>

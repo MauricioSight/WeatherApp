@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, FlatList, Alert } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import AsyncStorage from '@react-native-community/async-storage'
 
-import getName from './Save'
 import commonStyles from '../commonStyles'
 import Location from '../components/Location'
 
 export default props => {
     const [locationList, setLocationList] = useState([])
-    const [currentItem, setCurrentItem] = useState([])
 
     useEffect(() => {
         getLocalSave()
+        console.log('Arquivo Local')
     }, [])
 
     useEffect(() => {
@@ -37,14 +36,9 @@ export default props => {
     }
 
     function saveLocation(location) {
-        let cloneList = []
-        if (locationList != null) {
-            cloneList = locationList
-            cloneList.push(location)
-            const sortList = sortBySavedAt(cloneList)
-        } else {
-            cloneList = [location]
-        }
+        const cloneList = locationList ? [...locationList] : []
+        cloneList.push(location)
+        sortBySavedAt(cloneList)
         setLocationList(cloneList)
         AsyncStorage.setItem('LocationList', JSON.stringify(cloneList))
     }
@@ -79,12 +73,11 @@ export default props => {
     }
 
     function sortBySavedAt(list) {
-        list.sort(function (a, b) {
+        list.sort((a, b) => {
             if (a.savedAt > b.savedAt) return -1
             if (a.savedAt < b.savedAt) return 1
             return 0
         })
-        return list
     }
 
     return (

@@ -9,14 +9,14 @@ import WatherView from '../screens/WeatherView'
 
 const Stack = createStackNavigator()
 
-export default props => (
+export default _ => (
     <SafeAreaView style={{flex: 1}}>     
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="List"
+            <Stack.Navigator initialRouteName='List'
                 screenOptions={{ headerShown: false }}>
-                <Stack.Screen name="List" component={LocationList}/>
-                <Stack.Screen name="Search" component={SearchLocation}/>
-                <Stack.Screen name="Weather" component={WatherView}/>
+                <Stack.Screen name='List' component={LocationList}/>
+                <Stack.Screen name='Search' component={SearchLocation}/>
+                <Stack.Screen name='Weather' component={WatherView}/>
             </Stack.Navigator>
         </NavigationContainer>
     </SafeAreaView>

@@ -6,23 +6,13 @@ import weatherRequestServer from '../weatherRequest'
 import WeatherDisplay from '../components/WeatherDisplay'
 import commonStyles from '../commonStyles'
 import Map from '../components/Map'
-import SaveLocation from './Save'
+import SaveLocationScreen from './LocationName'
 import Options from './Options'
 
-const initialState = {
-    city: '',
-    description: '',
-    fellsLike: '',
-    temp: '',
-    tempMax: '',
-    tempMin: ''
-}
-
 export default props => {
-
     const [options, setOptions] = useState(false)
     const [saveScreen, setSaveScreen] = useState(false)
-    const [weather, setWeather] = useState(initialState)
+    const [weather, setWeather] = useState({})
 
     useEffect(() => {
         weatherRequest(props.route.params.location)
@@ -54,30 +44,30 @@ export default props => {
     }
 
     function onEditLocation(name) {
-        const editWaether = { id: weather.id, name }
+        const editLocation = { id: weather.id, name }
         setOptions(false,
-            props.navigation.navigate('List', { editLocation: editWaether }))
+            props.navigation.navigate('List', { editLocation }))
     }
 
     function onDeleteLocation() {
         setOptions(false,
-            Alert.alert(`Delete ${weather.name} location ?`, 'This action will delete the location',
+            Alert.alert(`Delete ${weather.name} location?`, 'This action will delete the location',
                 [{
-                    text: "DELETE",
+                    text: 'DELETE',
                     onPress: () => props.navigation.navigate('List', { deleteLocation: weather })
                 },
-                { text: "Calcel" }], { cancelable: false }))
+                { text: 'Cancel' }], { cancelable: false }))
     }
 
     return (
         <View style={style.container}>
             {weather.city ? (
                 <>
-                    <Map markerCoord={{ latitude: weather.coord.latitude, longitude: weather.coord.longitude }} />
+                    <Map markerCoord={{ latitude: weather.coord.latitude, longitude: weather.coord.longitude }} getMylocation={() => null} />
 
                     <View style={{ position: 'absolute', width: '100%', height: '100%' }}>
-                        <View style={style.weatherView}>
-                            <View style={style.options}>
+                        <View style={{ flex: 2 }}>
+                            <View style={style.headerButtons}>
                                 <TouchableOpacity onPress={() => props.navigation.goBack()}>
                                     <View style={style.icons}>
                                         <Icon name='chevron-left' color='#FFF' size={20} />
@@ -93,7 +83,7 @@ export default props => {
                                 <WeatherDisplay weather={weather} />
                             </View>
                         </View>
-                        <View style={{ flex: 3 }}></View>
+                        <View style={{ flex: 3 }} />
                         {!weather.id ?
                             <View style={{ bottom: 30 }}>
                                 <TouchableOpacity onPress={() => setSaveScreen(true)}>
@@ -102,19 +92,18 @@ export default props => {
                                         <Text style={style.favoriteText}>Favorite</Text>
                                     </View>
                                 </TouchableOpacity>
-                            </View>
-                            : null
+                            </View> : null
                         }
                     </View>
                 </>
 
             ) : <ActivityIndicator size='large' color='#FFF' style={{ alignSelf: 'center' }} />}
-            <SaveLocation isVisible={saveScreen}
+            <SaveLocationScreen isVisible={saveScreen}
                 onSave={weather.id ?
                     onEditLocation : onSaveLocation}
                 onCancel={() => setSaveScreen(false)} />
             <Options isVisible={options}
-                saved={weather.id ? true : false}
+                mode={weather.id ? true : false}
                 onSave={onSaveLocation}
                 onEdit={() => setOptions(false, setSaveScreen(true))}
                 onDelete={onDeleteLocation}
@@ -129,20 +118,20 @@ const style = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: commonStyles.colors.backgroundColor
     },
+    headerButtons: {
+        width: '100%',
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        backgroundColor: commonStyles.colors.backgroundTransparent,
+    },
     icons: {
         alignItems: 'center',
         justifyContent: 'center',
         height: 30,
         width: 30,
         borderRadius: 12
-    },
-    options: {
-        width: '100%',
-        paddingHorizontal: 20,
-        paddingVertical: 7,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        backgroundColor: commonStyles.colors.backgroundTransparent,
     },
     display: {
         width: '100%',
@@ -152,13 +141,6 @@ const style = StyleSheet.create({
         paddingBottom: 25,
         borderBottomLeftRadius: 20,
         borderBottomRightRadius: 20,
-    },
-    weatherView: {
-        flex: 2,
-        alignItems: 'center',
-    },
-    content: {
-        flex: 3
     },
     favoriteButton: {
         width: '100%',
