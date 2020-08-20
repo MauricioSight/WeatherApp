@@ -11,7 +11,6 @@ export default props => {
 
     useEffect(() => {
         getLocalSave()
-        console.log('Arquivo Local')
     }, [])
 
     useEffect(() => {
