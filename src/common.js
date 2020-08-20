@@ -43,7 +43,7 @@ function getIcon(iconServer, sunSet, currentTime) {
 }
 
 function utcToTimezoneDate(date, timerzone) {
-    return date * 1000 + timerzone * 1000
+    return date * 1000 + timerzone * 1000 + (new Date().getTimezoneOffset() * 60) * 1000
 }
 
 export { getUrlByCity, getUrlByCoord,  getIcon, utcToTimezoneDate }
