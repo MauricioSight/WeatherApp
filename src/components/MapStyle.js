@@ -1,4 +1,4 @@
-// Tema dark do mapa
+// Tema dark do mapa.
 export default [
   {
     "elementType": "geometry",

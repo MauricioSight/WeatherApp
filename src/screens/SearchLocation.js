@@ -19,9 +19,9 @@ export default props => {
 
     /**
      * Muda a localização escolhida pelo usuário.
-     * Recebe uma cidade ou as codernadas de um local, Caso recebe as cordenadas
+     * Recebe uma cidade ou as coordenadas de um local. Caso receba as coordenadas,
      * é requisitado o nome da cidade pelo servidor da OpenWeatherApi e mostra o nome da
-     * mesma na lista de pesquisa. Caso receba a cidade é requisita as cordenadas do mesmo.
+     * mesma na lista de pesquisa. Caso receba a cidade, é requisita as coordenadas do mesmo.
      * @param {String} city Nome da cidade
      * @param {Object} coord As cordenadas
      */
@@ -51,7 +51,7 @@ export default props => {
     }
 
     /**
-     * Parte para próxima tela, de exibição dos parâmetros do clima, caso o usuário escolha a 
+     * Parte para próxima tela (exibição dos parâmetros do clima) caso o usuário escolha a 
      * localização pesquisada
      */
     function searchWeatherSelected() {
@@ -64,7 +64,7 @@ export default props => {
     }
 
     /**
-     * Parte para próxima tela, de exibição dos parâmetros do clima, caso o usuário escolha a 
+     * Parte para próxima tela (exibição dos parâmetros do clima) caso o usuário escolha a 
      * sua localização
      */
     function searchWeatherMyLocation() {
@@ -106,7 +106,7 @@ export default props => {
 }
 
 /**
- * Estilos dos compoentes inserido nesse componente
+ * Estilos dos compoentes inserido nesse componente.
  */
 const style = StyleSheet.create({
     container: {

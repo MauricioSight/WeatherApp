@@ -15,10 +15,10 @@ import Options from './Options'
 export default props => {
     const [options, setOptions] = useState(false)        // Estado do modal de opções
     const [saveScreen, setSaveScreen] = useState(false)  // Estado do modal de coleta do nome pelo usuário
-    const [weather, setWeather] = useState({})           // Estado com o objeto item, parâmetros do clima
+    const [weather, setWeather] = useState({})           // Estado com o objeto item: parâmetros do clima
 
     /**
-     * Componente formado recebe um item para expor as variáveis de clima
+     * Componente quando formado recebe um item para expor as variáveis de clima.
      */
     useEffect(() => {
         weatherRequest(props.route.params.location)
@@ -58,7 +58,7 @@ export default props => {
     }
 
     /**
-     * Edita um item em questão, caso já esteja salvo, e volta a Tela de lista.
+     * Edita o mesmo, caso já esteja salvo, e volta a Tela de lista.
      * @param {String} name novo nome
      */
     function onEditLocation(name) {
@@ -82,7 +82,7 @@ export default props => {
 
     return (
         <View style={style.container}>
-            {/* Mosta as informações so quando a requisição ao servidor termina */}
+            {/* Mosta as informações só quando a requisição ao servidor termina */}
             {weather.city ? (
                 <>
                     <Map markerCoord={{ latitude: weather.coord.latitude, longitude: weather.coord.longitude }} getMylocation={() => null} />
@@ -128,13 +128,13 @@ export default props => {
                 </>
 
             ) : <ActivityIndicator size='large' color='#FFF' style={{ alignSelf: 'center' }} />}
-            {/* Se item salvo o nome retornado pelo modal parte para função editar, caso não a função salvar */}
+            {/* Se o item está salvo, o nome retornado pelo modal parte para função editar, caso não, à função salvar */}
             <SaveLocationScreen isVisible={saveScreen}
                 onSave={weather.id ?
                     onEditLocation : onSaveLocation}
                 onCancel={() => setSaveScreen(false)} />      
 
-            {/* Se item salvo Modal Opções mostra Editar e Deletar, caso não Favoritar */}
+            {/* Se o item está salvo, o Modal Opções mostra Editar e Deletar, caso não, Favoritar */}
             <Options isVisible={options}
                 mode={weather.id ? true : false}
                 onSave={onSaveLocation}
@@ -146,7 +146,7 @@ export default props => {
 }
 
 /**
- * Estilos dos compoentes inserido nesse componente
+ * Estilos dos compoentes inserido nesse componente.
  */
 const style = StyleSheet.create({
     container: {

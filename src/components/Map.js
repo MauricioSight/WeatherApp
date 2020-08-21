@@ -6,21 +6,21 @@ import Geolocation from '@react-native-community/geolocation'
 import MapStyle from './MapStyle'
 
 /**
- * Componente de redenrização do mapa
+ * Componente de renderização do mapa
  */
 export default props => {
     const [myLocation, setMyLocation] = useState()                  // Localização do Usuário
     const [locationPermission, setLocationPermission] = useState()  // Validação de permissão para pegar a localização atual 
 
     /**
-     * Quando definida a localização do usuário é exportada pro componente pai
+     * Quando definida a localização do usuário é exportada pro componente pai.
      */
     useEffect(() => {
         myLocation && props.getMylocation(myLocation)
     }, [myLocation])
 
     /**
-     * Coletar localização atual
+     * Coletar localização atual.
      */
     useEffect(() => {
         verifyLocationPermission()
@@ -36,7 +36,7 @@ export default props => {
     }, [locationPermission])
 
     /**
-     * Verificação de premissão para coletar localização atual
+     * Verificação de premissão para coletar localização atual.
      */
     async function verifyLocationPermission() {
         try {
@@ -68,10 +68,10 @@ export default props => {
         longitudeDelta: 0.08
     }
 
-    // Latitude recebida do componente pai caso definida ou inicial se não
+    // Latitude recebida do componente pai caso definida, ou inicial se não
     const latitude = props.markerCoord && props.markerCoord.latitude || initialRegion.latitude    
     const longitude = props.markerCoord && props.markerCoord.longitude || initialRegion.longitude 
-    // ^ Longitude recebida do componente pai caso definida ou inicial se não  ^ 
+    // ^ Longitude recebida do componente pai caso definida, ou inicial se não  ^ 
 
     return (
         <MapView
@@ -87,7 +87,7 @@ export default props => {
             onPress={e => props.updateMarker ? props.updateMarker(false, { ...e.nativeEvent.coordinate }) : null}>
             {/* ^ Caso o componente pai permita que o usuário possa marcar o mapa em outra região ^ */}    
 
-            {/* Caso o componente recebe as cordenas do marcador do componente pai o mapa é marcado */}
+            {/* Caso o componente recebe as coordenadas do marcador do componente pai o mapa é marcado */}
             {props.markerCoord ?
                 <Marker
                     coordinate={{

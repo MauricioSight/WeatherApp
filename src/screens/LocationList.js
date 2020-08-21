@@ -11,13 +11,10 @@ import Location from '../components/Location'
  * botão a qual parte para tela de pesquisa de localização.
  */
 export default props => {
-    /**
-     * Estado contendo a lista de itens salvos
-     */
-    const [locationList, setLocationList] = useState([])
+    const [locationList, setLocationList] = useState([]) // Estado contendo a lista de itens salvos
 
     /**
-     * Quando aplicativo iniciado coleta lista salva no dispositivo.
+     * Quando aplicativo iniciado, coleta lista salva no dispositivo.
      */
     useEffect(() => {
         getLocalSave()
@@ -105,8 +102,8 @@ export default props => {
     }
 
     /**
-     * Ordena a lista de acordo com a data de salvamento em ordem decrescento. 
-     * Itens adicionados mais cedo vem primeiro
+     * Ordena a lista de acordo com a data de salvamento em ordem decrescente. 
+     * Itens adicionados mais cedo vem primeiro.
      * @param {Array} list Lista
      */
     function sortBySavedAt(list) {
@@ -141,7 +138,7 @@ export default props => {
 }
 
 /**
- * Estilos dos compoentes inserido nesse componente
+ * Estilos dos compoentes inserido nesse componente.
  */
 const style = StyleSheet.create({
     conteiner: {

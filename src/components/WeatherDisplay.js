@@ -7,7 +7,7 @@ import commonStyles from '../commonStyles'
 import { getIcon } from '../common'
 
 /**
- * Contuitui o componente de exição das váriaveis do obejto clima
+ * Constitui o componente de exição das váriaveis do obejto clima
  */
 export default props => {
     const weather = props.weather // Objeto clima tirado das propriedades recebidas
@@ -37,7 +37,7 @@ export default props => {
 }
 
 /**
- * Estilos dos compoentes inserido nesse componente
+ * Estilos dos compoentes inserido nesse componente.
  */
 const style = StyleSheet.create({
     textWeatherValues: {

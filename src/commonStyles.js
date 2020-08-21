@@ -1,4 +1,4 @@
-// Estilos padão usados pelos componentes
+// Estilos padrão usados pelos componentes
 export default {
     fontFamily: 'Lato',
     colors: {

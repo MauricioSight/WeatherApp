@@ -1,4 +1,4 @@
-// Url padrão para requis requisição de clima pelo OpenWeatherApi
+// Url padrão para requisição de clima pelo OpenWeatherApi
 const serverUrl = 'https://api.openweathermap.org/data/2.5/weather?'
 
 // Chave para requisição de clima pelo OpenWeatherApi
@@ -27,7 +27,7 @@ const icon = {
 }
 
 /**
- * Pegar a Url do OpenWeatherApi para requisição de clime pela nome da cidade.
+ * Pegar a Url do OpenWeatherApi para requisição do clima pela nome da cidade.
  * @param {String} city nome da cidade
  * @returns {String} Url
  */
@@ -36,7 +36,7 @@ function getUrlByCity(city) {
 }
 
 /**
- * Pegar a Url do OpenWeatherApi para requisição de clime pelas cordenadas do local.
+ * Pegar a Url do OpenWeatherApi para requisição do climo pelas coordenadas do local.
  * @param {String} coords  Cordenadas do local 
  * @returns {String} Url
  */
@@ -46,7 +46,7 @@ function getUrlByCoord(coords) {
 
 /**
  * Pegar o icone de acordo com descrição do clima e o horário.
- * Obs: Horário referente numero em milisegundos desde 1º de Janeiro de 1970.
+ * Obs: Horário referente número em milisegundos desde 1º de Janeiro de 1970.
  * @param {String} iconServer icone receido pelo servidor do OpenWeatherApi
  * @param {Number} sunRise horário do nascer do sol
  * @param {Number} sunSet horário do pôr do sol
@@ -68,7 +68,7 @@ function getIcon(iconServer, sunRise, sunSet, currentTime) {
 
 /**
  * Transforma a data recebida pelo OpenWeatherApi no fuso horário do local desejado.
- * Obs: Horário referente numero em milisegundos desde 1º de Janeiro de 1970.
+ * Obs: Horário referente número em milisegundos desde 1º de Janeiro de 1970.
  * @param {Number} date Data no UTC em segundos
  * @param {Number} timerzone Fuso horário do local em segundos
  * @returns {Number} Data com o fuso horário desejado em milisegundos

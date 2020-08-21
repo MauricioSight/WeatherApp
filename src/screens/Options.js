@@ -9,7 +9,7 @@ export default props => {
 
     /**
      * Configura o que as opções do componente pai possui.
-     * Podendo ser: Favorito para favoritar o item ou Editar e Deletar um item já salvo
+     * Podendo ser: Favorito, para favoritar o item, ou Editar e Deletar um item já salvo.
      * @returns {JSX} referente ao botões
      */
     function mode() {
@@ -61,7 +61,7 @@ export default props => {
 }
 
 /**
- * Estilos dos compoentes inserido nesse componente
+ * Estilos dos compoentes inserido nesse componente.
  */
 const style = StyleSheet.create({
     container: {

@@ -15,7 +15,7 @@ import commonStyles from '../commonStyles'
 const initalState = '' // Estado inicial
 
 /**
- * Componente Modal para o usuário inserir o nome a qual item deve ser salvo
+ * Componente Modal para o usuário inserir o nome a qual o item deve ser salvo
  */
 export default props => {
     const [name, setName] = useState(initalState)  // Estado com o nome inserido pelo usuário
@@ -60,7 +60,7 @@ export default props => {
 }
 
 /**
- * Estilos dos compoentes inserido nesse componente
+ * Estilos dos compoentes inserido nesse componente.
  */
 const style = StyleSheet.create({
     container: {

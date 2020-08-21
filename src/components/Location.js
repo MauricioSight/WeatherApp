@@ -14,7 +14,7 @@ export default props => {
     const [getName, setGetName] = useState(false)  // Estado do modal de coleta do nome pelo usuário caso função editar
 
     /**
-     * Delta a si próprio
+     * Deleta a si mesmo
      */
     function onSelfDelete() {
         Alert.alert(`Delete ${props.name} location?`, 'This action will delete the location',
@@ -77,7 +77,7 @@ export default props => {
 }
 
 /**
- * Estilos dos compoentes inserido nesse componente
+ * Estilos dos compoentes inserido nesse componente.
  */
 const style = StyleSheet.create({
     conteiner: {
