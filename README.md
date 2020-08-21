@@ -56,6 +56,8 @@ Ainda no display, o icone mostrado ao lado da temperatura atual muda de acordo c
   - React Native
  ### Dispositivos testados:
   - Samsung Galaxy M30
+  - Samsung Galaxy M20
+  - Samsung Galaxy J8
   - Zenfone 3 max
   - Motorola moto G7 Power
  
