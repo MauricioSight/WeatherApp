@@ -37,7 +37,7 @@ function getUrlByCity(city) {
 
 /**
  * Pegar a Url do OpenWeatherApi para requisição do climo pelas coordenadas do local.
- * @param {String} coords  Cordenadas do local 
+ * @param {String} coords  coordenadas do local 
  * @returns {String} Url
  */
 function getUrlByCoord(coords) {

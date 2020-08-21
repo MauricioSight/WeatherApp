@@ -6,7 +6,7 @@ import { getUrlByCity, getUrlByCoord, utcToTimezoneDate } from '../common'
 /**
  * Requisita do servidor da OpenWeatherApi as informações sobre o clima de uma dada região.
  * Pode-se escolher em mandar um ou outro parâmetro. Caso mande os 2, a cidade tem prioridade.
- * Para escolher por cordenadas mande: getWeather(false, coord)
+ * Para escolher por coordenadas mande: getWeather(false, coord)
  * @param {String} city Nome da cidade
  * @param {Object} coord Coordenadas do local
  * @return {Object} objeto com as informações do clima dada a região ou Null se erro
@@ -30,7 +30,7 @@ async function getWeather(city, coord) {
  * Obs: Não alerta caso de erro!
  * Requisita do servidor da OpenWeatherApi as informações sobre o clima de uma dada região.
  * Pode-se escolher em mandar um ou outro parâmetro. Caso mande os 2, a cidade tem prioridade.
- * Para escolher por cordenadas mande: getWeather(false, coord)
+ * Para escolher por coordenadas mande: getWeather(false, coord)
  * @param {String} city nome da cidade
  * @param {Object} coord coordenadas do local
  * @return {Object} objeto com as informações do clima dada a região

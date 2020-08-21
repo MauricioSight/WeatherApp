@@ -39,7 +39,7 @@ export default props => {
     }
 
     /**
-     * Componente monstado quando o usuário arrasta o item para a direita
+     * Componente monstado quando o usuário arrasta o item para a esquerda
      * @returns {JSX} O componente
      */
     function getRightContent() {
