@@ -6,13 +6,25 @@ import requestServerData, { getWatherWithoutCatch } from '../functions/weatherRe
 import commonStyles from '../commonStyles'
 import Map from '../components/Map'
 
-const initialState = ''
+const initialState = ''  // Estado inicial do nome da cidade
 
+/**
+ * Componente Tela exibe um mapa a qual se pode marcar uma região de preferência e uma barra de pesquisa 
+ * com uma lista podendo o usuário pesquisar uma cidade ou escolher sua localização para exibição do clima.
+ */
 export default props => {
-    const [city, setCity] = useState(initialState)
-    const [myLocation, setMyLocation] = useState({})
-    const [markedLocation, setMarkedLocation] = useState({})
+    const [city, setCity] = useState(initialState)           // Nome da cidade inserida pelo usuário
+    const [myLocation, setMyLocation] = useState({})         // Localização do usuário
+    const [markedLocation, setMarkedLocation] = useState({}) // Localização esolhida pelo usuário
 
+    /**
+     * Muda a localização escolhida pelo usuário.
+     * Recebe uma cidade ou as codernadas de um local, Caso recebe as cordenadas
+     * é requisitado o nome da cidade pelo servidor da OpenWeatherApi e mostra o nome da
+     * mesma na lista de pesquisa. Caso receba a cidade é requisita as cordenadas do mesmo.
+     * @param {String} city Nome da cidade
+     * @param {Object} coord As cordenadas
+     */
     async function onUpdateMarker(city, coord = false) {
         if (coord) {
             const cityName = await requestServerData(false, coord)
@@ -29,11 +41,19 @@ export default props => {
         }
     }
 
+    /**
+     * Define a localização atual do usuário
+     * @param {Object} location Localização
+     */
     function updateMyLocation(location) {
         setMyLocation(location.coord)
         setMarkedLocation(location)
     }
 
+    /**
+     * Parte para próxima tela, de exibição dos parâmetros do clima, caso o usuário escolha a 
+     * localização pesquisada
+     */
     function searchWeatherSelected() {
         if (markedLocation.city.toLowerCase() == city.trim().toLowerCase()) {
             props.navigation.navigate('Weather', { location: { coord: markedLocation.coord } })
@@ -43,6 +63,10 @@ export default props => {
         }
     }
 
+    /**
+     * Parte para próxima tela, de exibição dos parâmetros do clima, caso o usuário escolha a 
+     * sua localização
+     */
     function searchWeatherMyLocation() {
         props.navigation.navigate('Weather', { location: { coord: myLocation } })
     }
@@ -62,12 +86,14 @@ export default props => {
                         value={city} />
                 </View>
                 <View style={style.searchList}>
+                    {/* Adiciona a lista de pesquisa apenas quando a caixa de pesquisa possui algo */}
                     {city !== '' ?
                         <TouchableOpacity style={style.hairLine}
                             onPress={searchWeatherSelected}>
                             <Text style={style.listText}>{city}</Text>
                         </TouchableOpacity> : null
                     }
+                    {/* Adiciona a lista de pesquisa apenas quando a localização do usuário está definida */}
                     {myLocation.latitude ?
                         <TouchableOpacity onPress={searchWeatherMyLocation}>
                             <Text style={style.listText}>My Location</Text>
@@ -79,6 +105,9 @@ export default props => {
     )
 }
 
+/**
+ * Estilos dos compoentes inserido nesse componente
+ */
 const style = StyleSheet.create({
     container: {
         flex: 1,

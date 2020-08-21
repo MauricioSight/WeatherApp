@@ -3,6 +3,14 @@ import { Alert } from 'react-native'
 
 import { getUrlByCity, getUrlByCoord, utcToTimezoneDate } from '../common'
 
+/**
+ * Requisa do servidor da OpenWeatherApi as informações sobre o clime de uma dada região.
+ * Pode-se escolher em mandar um ou outro parametro, caso mande os 2 a cidade tem prioridade.
+ * Para escolher por cordenadas mande: getWeather(false, coord)
+ * @param {String} city Nome da cidade
+ * @param {Object} coord Cordenadas do local
+ * @return {Object} Objeto com as informações do clima dada a região ou Null se erro
+ */
 async function getWeather(city, coord) {
     const url = city ? getUrlByCity(city) : getUrlByCoord(coord)
 
@@ -18,6 +26,15 @@ async function getWeather(city, coord) {
     }
 }
 
+/**
+ * Obs: Não alerta caso de erro!
+ * Requisa do servidor da OpenWeatherApi as informações sobre o clime de uma dada região.
+ * Pode-se escolher em mandar um ou outro parametro, caso mande os 2 a cidade tem prioridade.
+ * Para escolher por cordenadas mande: getWeather(false, coord)
+ * @param {String} city nome da cidade
+ * @param {Object} coord cordenadas do local
+ * @return {Object} Objeto com as informações do clima dada a região
+ */
 async function getWatherWithoutCatch(city, coord) {
     const url = city ? getUrlByCity(city) : getUrlByCoord(coord)
 
@@ -29,6 +46,11 @@ async function getWatherWithoutCatch(city, coord) {
     } catch (err) {}
 }
 
+/**
+ * Filtra o obejto recebido pela OpenWeatherApi a qual retorna os parâmetros usados no app.
+ * @param {Object} data Obejto recebido pela OpenWeatherApi
+ * @return {Object} Objeto filtrado com os parâmetros utilizáveis
+ */
 function filter(data) {
     return {
         city: data.name,

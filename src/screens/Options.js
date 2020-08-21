@@ -2,8 +2,16 @@ import React from 'react'
 import { Modal, View, Text, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native'
 import commonStyles from '../commonStyles'
 
+/**
+ * Componente Modal mostra opções relacionadas ao compoenente pai.
+ */
 export default props => {
 
+    /**
+     * Configura o que as opções do componente pai possui.
+     * Podendo ser: Favorito para favoritar o item ou Editar e Deletar um item já salvo
+     * @returns {JSX} referente ao botões
+     */
     function mode() {
         if (props.mode) {
             return (
@@ -52,6 +60,9 @@ export default props => {
     )
 }
 
+/**
+ * Estilos dos compoentes inserido nesse componente
+ */
 const style = StyleSheet.create({
     container: {
         flex: 1,

@@ -6,9 +6,14 @@ import moment from 'moment'
 import commonStyles from '../commonStyles'
 import { getIcon } from '../common'
 
+/**
+ * Contuitui o componente de exição das váriaveis do obejto clima
+ */
 export default props => {
-    const weather = props.weather
-    const iconName = getIcon(weather.icon, weather.sunSet, new Date().getTime())
+    const weather = props.weather // Objeto clima tirado das propriedades recebidas
+
+    // Requisição do nome do icone de acordo com os paramâtros do clima
+    const iconName = getIcon(weather.icon, weather.sunRise, weather.sunSet, new Date().getTime()) 
 
     return (
         <>  
@@ -31,6 +36,9 @@ export default props => {
     )
 }
 
+/**
+ * Estilos dos compoentes inserido nesse componente
+ */
 const style = StyleSheet.create({
     textWeatherValues: {
         marginLeft: 10,

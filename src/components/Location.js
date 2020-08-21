@@ -7,9 +7,15 @@ import Icon from 'react-native-vector-icons/FontAwesome5'
 import commonStyles from '../commonStyles'
 import GetNameView from '../screens/LocationName'
 
+/**
+ * Constitui o item da lista da Tela de Lista
+ */
 export default props => {
-    const [getName, setGetName] = useState(false)
+    const [getName, setGetName] = useState(false)  // Estado do modal de coleta do nome pelo usuário caso função editar
 
+    /**
+     * Delta a si próprio
+     */
     function onSelfDelete() {
         Alert.alert(`Delete ${props.name} location?`, 'This action will delete the location',
             [{
@@ -19,6 +25,10 @@ export default props => {
             { text: 'Cancel' }], { cancelable: false })
     }
 
+    /**
+     * Edita o seu próprio nome
+     * @param {String} name novo nome
+     */
     function onSelfEdit(name) {
         if (name) {
             setGetName(false)
@@ -28,6 +38,10 @@ export default props => {
         }
     }
 
+    /**
+     * Componente monstado quando o usuário arrasta o item para a direita
+     * @returns {JSX} O componente
+     */
     function getRightContent() {
         return (
             <View style={style.rightButtons}>
@@ -62,6 +76,9 @@ export default props => {
     )
 }
 
+/**
+ * Estilos dos compoentes inserido nesse componente
+ */
 const style = StyleSheet.create({
     conteiner: {
         width: '100%',

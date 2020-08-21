@@ -9,6 +9,9 @@ import WatherView from './screens/WeatherView'
 
 const Stack = createStackNavigator()
 
+/**
+ * Componente inicial de navegação entre as telas do aplicativo.
+ */
 export default _ => (
     <SafeAreaView style={{flex: 1}}>     
         <NavigationContainer>
